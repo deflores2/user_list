@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import user_routes
+from app.routers import user_routers
 from app.db.database import engine, Base
+from app.exceptions.custom_exceptions import UserNotFoundError
+from app.exceptions.exception_handler import user_not_found_handler
 
 Base.metadata.create_all(bind=engine)
 
@@ -15,7 +17,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(user_routes.router)
+# Include the routes
+app.include_router(user_routers.router)
+
+
+# Add the custom exceptions
+app.add_exception_handler(UserNotFoundError, user_not_found_handler)
 
 @app.get("/")
 def root():
