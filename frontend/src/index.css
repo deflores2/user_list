@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
+button, a, [role="button"], input[type="submit"], input[type="button"] {
+    cursor: pointer;
+  }

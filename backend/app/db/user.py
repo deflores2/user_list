@@ -11,7 +11,7 @@ def read_db_user(user_id: int, session: Session) -> DBUser:
     
     return user_item      
 
-def  read_all_db_users(session: Session) -> list[DBUser]:
+def read_all_db_users(session: Session) -> list[DBUser]:
     users_list = session.query(DBUser).all()
     
     return users_list

@@ -19,3 +19,17 @@ export async function createUser(name: string, email: string): Promise<User> {
     });
     return response.json();
 }
+
+export const deleteUser = async (userId: number) => {
+    const response = await fetch(`${API_URL}/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  
+    if (!response.ok) {
+      throw new Error("Failed to delete user");
+    }
+    return await response.json();
+  };
