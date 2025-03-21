@@ -21,14 +21,12 @@ export function EditUserSheet({ userToEdit, setUserToEdit, handleUpdateUser }: E
         setEditedUser((prevUser) => ({ ...prevUser, [field]: e.target.value }));
     };
 
-    // Save the changes and update the parent state
     const handleSaveChanges = async () => {
         try {
-            // Call API to update user
             const updatedUser = await updateUser(editedUser.id, editedUser.name, editedUser.email);
-            // After successfully updating the backend, update the frontend state
+
             handleUpdateUser(updatedUser);
-            setUserToEdit(null); // Close the sheet
+            setUserToEdit(null);
         } catch (err) {
             console.log("Failed to update user", err);
         }
