@@ -28,10 +28,12 @@ def update_db_user(user_id: int, user: UserUpdate, session: Session) -> DBUser:
     user_item = read_db_user(user_id, session)
     
     for key, value in user.model_dump(exclude_none=True).items():
-        setattr(user, key, value)
+        setattr(user_item, key, value)
     
     session.commit()
     session.refresh(user_item)
+    
+    return user_item
     
 def delete_db_user(item_id: int, session: Session) -> DBUser:
     user_item = read_db_user(item_id, session)
